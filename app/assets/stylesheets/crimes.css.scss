@@ -1,0 +1,23 @@
+// Place all the styles related to the crimes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.loader {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url('page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+
+.dropdown-div {
+  margin: 15px auto;
+  width: 35%;
+}
+
+.maps {
+  width: 65%;
+  margin: 0 auto;
+}

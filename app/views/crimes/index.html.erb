@@ -1,0 +1,29 @@
+<%= stylesheet_link_tag 'gmaps4rails' %>
+<h1>Crimes</h1>
+<div class="dropdown-div">
+    <h4>Filter by CRIME TYPE or YEAR</h4>
+    <%= select_tag :crime_type, options_for_select(@crime_type) %>
+    <%= select_tag :crime_year, options_for_select(@crime_year) %>
+</div>
+<div id='maps' class="maps">
+    <%= gmaps("markers" => { "data" => @crime[@crime_type.first]}, "map_options" => {"auto_adjust" => true }) %>
+</div>
+
+<%= yield :scripts %>
+<div class="dropdown-div" style="width: 10%;">
+    <%= link_to 'Get New Data', { controller: 'crimes', action: 'index'} , id: 'data', class: 'btn-link' %>
+</div>
+<script type="text/javascript">
+  var crime = <%= raw(@crime.to_json.html_safe) %>
+  var crime_by_year = <%= raw(@crime_by_year.to_json.html_safe) %>
+  $("#crime_type").change(function () {
+    var txt = $(this).val();
+    Gmaps.map.replaceMarkers(eval(crime[txt]));
+  });
+  $("#crime_year").change(function () {
+    var txt = $(this).val();
+    Gmaps.map.replaceMarkers(eval(crime_by_year[txt]));
+  });
+</script>
+
+<div class="loader"></div>
